@@ -1,0 +1,97 @@
+/* Container da navegação */
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #93c5fd; /* azul claro */
+  padding: 0.5rem 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 80px;
+  position: relative;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  width: 100px;
+  height: 100px;
+}
+
+.logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Links de navegação */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  color: black;
+}
+
+.nav-links li {
+  cursor: pointer;
+}
+
+.nav-links li:hover {
+  color: #1e3a8a;
+}
+
+/* Contêiner de busca */
+.search-container {
+  position: relative;
+}
+
+.search-input {
+  padding: 0.25rem 0.75rem 0.25rem 2rem;
+  border-radius: 9999px;
+  border: 1px solid black;
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  width: 16px;
+  height: 16px;
+  color: black;
+}
+
+/* Media Queries para Responsividade */
+
+/* Media Query para telas com largura abaixo de 780px */
+@media (max-width: 780px) {
+  .nav-container {
+    flex-direction: row; /* Empilha os itens em uma coluna */
+    align-items: flex-start; /* Alinha os itens ao topo */
+    height: auto; /* Ajusta a altura */
+    align-items: centerf;
+  }
+
+  .nav-links {
+    flex-direction: column; /* Empilha os links verticalmente */
+    gap: 1rem;
+    display: none; /* Inicialmente, oculta os links */
+  }
+
+  .nav-links.active {
+    display: flex; /* Exibe os links quando a classe "active" for adicionada */
+  }
+
+  .menu-icon {
+    display: block; /* Exibe o ícone de menu */
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+
+  .logo {
+    width: 80px; /* Reduz o tamanho da logo */
+    height: 80px;
+  }
+}
