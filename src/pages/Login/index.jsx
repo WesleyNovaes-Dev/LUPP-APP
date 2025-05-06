@@ -22,7 +22,7 @@ export default function LoginPage() {
   return (
     <Container maxWidth="sm">
       <Box mt={10}>
-        <Typography variant="h4" gutterBottom>Login</Typography>
+        <Typography variant="h4" gutterBottom>Login Novo</Typography>
         <TextField fullWidth label="Login" name="login" onChange={handleChange} margin="normal" />
         <TextField fullWidth label="Senha" name="password" type="password" onChange={handleChange} margin="normal" />
         <Button fullWidth variant="contained" color="primary" onClick={handleSubmit}>Entrar</Button>
