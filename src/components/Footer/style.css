@@ -15,8 +15,7 @@ body, html {
     display: flex;
     justify-content: center; /* Centraliza o conteúdo do footer */
     width: 100%;
-    position: absolute;
-    bottom: 0;
+
   }
   
   .footer-content {
