@@ -9,7 +9,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchProducts().then(response => {
-      setProducts(response.data.products);
+      setProducts(response.data);
     });
   }, []);
 
@@ -21,11 +21,12 @@ const Home = () => {
       </div>
       
       <div className="posts-grid">
-        {products.map(product => (
+        {products.map(values => (
           <Post
-            key={product.id}
-            title={product.title}
-            image={product.images[0]}
+            key={values.id}
+            type={values.type}
+            image={values.mediaUrl}
+          
             className="post"
           />
           

@@ -9,6 +9,8 @@ import Navigation from "../components/Navigation"
 
 import Home from "../pages/Home";
 import Midia from '../pages/Midia';
+import Login from "../pages/Login";
+import RegisterPage from "../pages/register";
 
 
 
@@ -22,6 +24,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/midia" element={<Midia />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<RegisterPage />} />
        
       </Routes>
       <Footer/>
