@@ -1,32 +1,84 @@
 import { useState } from "react";
-import { TextField, Button, Container, Typography, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { login } from "../../services/Auth";
 import { saveToken } from "../../utils/auth";
+import "./style.css";
+import Membros from "../../assets/images/Membro LUPP.png"; // Altere o caminho se necessário
 
 export default function LoginPage() {
   const [form, setForm] = useState({ login: "", password: "" });
+  const [message, setMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const showMessage = (msg, type = "success") => {
+    setMessage({ text: msg, type });
+    setTimeout(() => setMessage(null), 3000);
+  };
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
     try {
+      // Realiza o login
       const { token } = await login(form);
-      saveToken(token);
-      alert("Login bem-sucedido!");
-      // Redirecionar ou atualizar UI
+      saveToken(token); // Salva o token para uso posterior
+
+      showMessage("Login bem-sucedido!", "success");
+
+      // Redireciona para a página home
+      navigate("/home");
     } catch (error) {
-      alert("Falha no login.");
+      showMessage("Falha no login. Verifique suas credenciais.", "error");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <Container maxWidth="sm">
-      <Box mt={10}>
-        <Typography variant="h4" gutterBottom>Login Novo</Typography>
-        <TextField fullWidth label="Login" name="login" onChange={handleChange} margin="normal" />
-        <TextField fullWidth label="Senha" name="password" type="password" onChange={handleChange} margin="normal" />
-        <Button fullWidth variant="contained" color="primary" onClick={handleSubmit}>Entrar</Button>
-      </Box>
-    </Container>
+    <div className="cadastro-page">
+      <div className="cadastro-container">
+        <div className="membro-lupp-section">
+          <div className="coroa-container">
+            <div className="coroa-icon">
+              <img src={Membros} alt="Membro LUPP" />
+            </div>
+          </div>
+        </div>
+        <div className="form-section">
+          <form className="cadastro-form" onSubmit={handleSubmit}>
+            {message && <div className={`alert ${message.type}`}>{message.text}</div>}
+
+            <div className="form-group">
+              <label htmlFor="login">E-mail</label>
+              <input
+                type="email"
+                name="login"
+                required
+                placeholder="E-mail"
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password">Senha</label>
+              <input
+                type="password"
+                name="password"
+                required
+                placeholder="Senha"
+                onChange={handleChange}
+              />
+            </div>
+
+            <button type="submit" className="cadastro-button" disabled={loading}>
+              {loading ? "Entrando..." : "Entrar"}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }

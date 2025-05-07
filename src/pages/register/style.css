@@ -1,0 +1,162 @@
+.cadastro-page {
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .cadastro-container {
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    flex-direction: column;
+  }
+  
+  .form-section {
+    flex: 1;
+    padding: 2rem;
+    background-color: #f8fafc;
+  }
+  
+  .membro-lupp-section {
+    width: 100%;
+    background-color: #eff6ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    border-bottom: 1px solid #d1d5db;
+  }
+  
+  .coroa-container {
+    text-align: center;
+  }
+  
+  .coroa-icon img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .cadastro-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 0.95rem;
+  }
+  
+  .form-group input {
+    padding: 0.75rem 1rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .form-group input:focus {
+    border-color: #3b82f6;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  }
+  
+  .form-group input::placeholder {
+    color: #94a3b8;
+  }
+  
+  .cadastro-button {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+  }
+  
+  .cadastro-button:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+  }
+  
+  @media (min-width: 768px) {
+    .cadastro-container {
+      flex-direction: row;
+    }
+  
+    .membro-lupp-section {
+      width: 300px;
+      border-bottom: none;
+      border-right: 1px solid #d1d5db;
+    }
+  
+    .form-section {
+      padding: 3rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .form-section,
+    .membro-lupp-section {
+      padding: 1rem;
+    }
+  }
+  
+  .alert {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-align: center;
+    animation: fadeInOut 4s ease-in-out forwards;
+  }
+  
+  .alert.success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #34d399;
+  }
+  
+  .alert.error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #f87171;
+  }
+  
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    10%, 90% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+  

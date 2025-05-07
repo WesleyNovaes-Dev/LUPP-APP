@@ -23,6 +23,7 @@ const App = () => {
         <Navigation/>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/midia" element={<Midia />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterPage />} />
