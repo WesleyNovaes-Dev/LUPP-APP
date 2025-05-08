@@ -1,84 +1,143 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { login } from "../../services/Auth";
-import { saveToken } from "../../utils/auth";
+// src/pages/Home/HomePage.jsx
+import React, { useEffect, useState } from "react";
+import { getPosts } from "../../services/PostService";
+import {
+  Box,
+  Typography,
+  Card,
+  CardContent,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Button,
+} from "@mui/material";
 import "./style.css";
-import Membros from "../../assets/images/Membro LUPP.png"; // Altere o caminho se necessário
 
-export default function LoginPage() {
-  const [form, setForm] = useState({ login: "", password: "" });
-  const [message, setMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+const HomePage = () => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [currentPost, setCurrentPost] = useState(null);
 
-  const showMessage = (msg, type = "success") => {
-    setMessage({ text: msg, type });
-    setTimeout(() => setMessage(null), 3000);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const data = await getPosts();
+        const list = Array.isArray(data) ? data : data?.content || [];
+        setPosts(list);
+      } catch (err) {
+        console.error("Erro ao carregar os posts:", err);
+        setError("Erro ao carregar os posts");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPosts();
+  }, []);
+
+  const handleOpenDialog = (post) => {
+    setCurrentPost(post);
+    setOpenDialog(true);
   };
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+    setCurrentPost(null);
+  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      // Realiza o login
-      const { token } = await login(form);
-      saveToken(token); // Salva o token para uso posterior
-
-      showMessage("Login bem-sucedido!", "success");
-
-      // Redireciona para a página home
-      navigate("/home");
-    } catch (error) {
-      showMessage("Falha no login. Verifique suas credenciais.", "error");
-    } finally {
-      setLoading(false);
+  const renderMedia = (url) => {
+    if (!url) {
+      return <Typography color="error">Mídia não encontrada.</Typography>;
     }
+
+    const u = url.toLowerCase();
+
+    if (/\.(jpeg|jpg|png|gif|bmp|webp)$/.test(u)) {
+      return <img src={url} alt="Post media" className="media-content" />;
+    }
+
+    if (/\.(mp4|webm|ogg|mov)$/.test(u)) {
+      return (
+        <video controls className="media-content">
+          <source src={url} type="video/mp4" />
+          Seu navegador não suporta vídeo.
+        </video>
+      );
+    }
+
+    return (
+      <Typography>
+        Tipo de mídia não suportado.&nbsp;
+        <a href={url} target="_blank" rel="noopener noreferrer">
+          Clique para abrir
+        </a>
+      </Typography>
+    );
   };
 
   return (
-    <div className="cadastro-page">
-      <div className="cadastro-container">
-        <div className="membro-lupp-section">
-          <div className="coroa-container">
-            <div className="coroa-icon">
-              <img src={Membros} alt="Membro LUPP" />
-            </div>
-          </div>
-        </div>
-        <div className="form-section">
-          <form className="cadastro-form" onSubmit={handleSubmit}>
-            {message && <div className={`alert ${message.type}`}>{message.text}</div>}
+    <Box className="home-container">
+      <Box className="home-content">
+        <Typography variant="h4" gutterBottom align="center">
+          Posts
+        </Typography>
 
-            <div className="form-group">
-              <label htmlFor="login">E-mail</label>
-              <input
-                type="email"
-                name="login"
-                required
-                placeholder="E-mail"
-                onChange={handleChange}
-              />
-            </div>
+        {loading ? (
+          <Box className="loading-box">
+            <CircularProgress />
+          </Box>
+        ) : error ? (
+          <Typography color="error" align="center">
+            {error}
+          </Typography>
+        ) : posts.length === 0 ? (
+          <Typography align="center">Nenhum post encontrado.</Typography>
+        ) : (
+          <Box className="posts-grid">
+            {posts.map((post) => (
+              <Card
+                key={post.id}
+                className="post-card"
+                onClick={() => handleOpenDialog(post)}
+              >
+                <CardContent>
+                  <Typography variant="h6" align="center">
+                    {post.title}
+                  </Typography>
+                  <Box className="media-wrapper">
+                    {renderMedia(post.mediaUrl)}
+                  </Box>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    align="center"
+                    className="description"
+                  >
+                    {post.description}
+                  </Typography>
+                </CardContent>
+              </Card>
+            ))}
+          </Box>
+        )}
+      </Box>
 
-            <div className="form-group">
-              <label htmlFor="password">Senha</label>
-              <input
-                type="password"
-                name="password"
-                required
-                placeholder="Senha"
-                onChange={handleChange}
-              />
-            </div>
-
-            <button type="submit" className="cadastro-button" disabled={loading}>
-              {loading ? "Entrando..." : "Entrar"}
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+      {/* Dialog para exibir mídia em destaque */}
+      <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="md" fullWidth>
+        <DialogTitle>{currentPost?.title}</DialogTitle>
+        <DialogContent className="dialog-media">
+          {renderMedia(currentPost?.mediaUrl)}
+          <Typography mt={2}>{currentPost?.description}</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog}>Fechar</Button>
+        </DialogActions>
+      </Dialog>
+    </Box>
   );
-}
+};
+
+export default HomePage;

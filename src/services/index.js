@@ -1,3 +1,3 @@
 // src/Services/index.js
-const API_BASE_URL = "http://18.226.159.101:8080";
+const API_BASE_URL = "http://3.145.50.114:8080";
 export default API_BASE_URL;
