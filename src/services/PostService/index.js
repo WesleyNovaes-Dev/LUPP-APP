@@ -41,3 +41,25 @@ export const createPost = async (postData) => {
   }
 };
 
+// ✅ Nova função adicionada: buscar perguntas (QUESTIONS) com Bearer Token
+export const getQuestions = async (token) => {
+  try {
+    const response = await fetch(`${API_URL}/api/media/type/QUESTION`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,  // Envia o token Bearer na requisição
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao buscar perguntas");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Erro ao buscar perguntas:", error);
+    return [];
+  }
+};
