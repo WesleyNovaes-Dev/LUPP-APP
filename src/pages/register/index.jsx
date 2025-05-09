@@ -30,12 +30,8 @@ export default function RegisterPage() {
       await register({ login: form.login, password: form.password, role: "USER" });
       showMessage("Cadastro realizado com sucesso!", "success");
 
-      // Login automático
-      const { token } = await login({ login: form.login, password: form.password });
-      saveToken(token);
-
-      // Redirecionar para home
-      navigate("/home");
+      // Redirecionar para login
+      navigate("/login");
     } catch (error) {
       showMessage("Erro ao cadastrar. Verifique os dados.", "error");
     } finally {
@@ -43,7 +39,6 @@ export default function RegisterPage() {
     }
   };
 
- 
   return (
     <div className="cadastro-page">
       <div className="cadastro-container">
@@ -82,4 +77,3 @@ export default function RegisterPage() {
     </div>
   );
 }
-

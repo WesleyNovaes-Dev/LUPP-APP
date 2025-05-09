@@ -1,11 +1,15 @@
-// src/utils/auth.js
-
+//src/utils/auth.js
+// Salva o token no localStorage
 export const saveToken = (token) => {
-    localStorage.setItem("authToken", token);
-  };
-  
-  export const getToken = () => {
-    return localStorage.getItem("authToken");
-  };
-  
-  localStorage.removeItem("authToken");
+  localStorage.setItem("token", token);
+};
+
+// Recupera o token
+export const getToken = () => {
+  return localStorage.getItem("token");
+};
+
+// Remove o token (para logout, por exemplo)
+export const removeToken = () => {
+  localStorage.removeItem("token");
+};

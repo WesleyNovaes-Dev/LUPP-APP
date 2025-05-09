@@ -1,13 +1,43 @@
+// src/services/PostService.js
 import axios from "axios";
-import API_BASE_URL from "../index"; // Importa a URL base da API
+import API_URL from "../index";
 
-
-export const getPosts = async (searchQuery) => {
+// Função para buscar todos os posts
+export const getPosts = async () => {
   try {
-    const res = await axios.get(`${API_BASE_URL}/api/media/type/POST`);
-    return res.data; // Retorna os dados recebidos da API
+    const response = await fetch(`${API_URL}/api/media/type/POST`);
+    if (!response.ok) {
+      throw new Error("Erro ao buscar posts");
+    }
+    const data = await response.json();
+   
+    return data;
   } catch (error) {
-    console.error("Erro ao buscar dados:", error);
-    throw new Error("Falha na busca");
+    console.error("Erro ao buscar posts:", error);
+    return [];
   }
 };
+
+// Função para criar um novo post
+export const createPost = async (postData) => {
+  try {
+    const response = await fetch(`${API_URL}/posts`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(postData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao criar post");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Erro ao criar post:", error);
+    throw new Error("Falha ao criar o post");
+  }
+};
+
