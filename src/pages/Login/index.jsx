@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../../services/Auth'; // Importe o serviço de login
+import { login } from '../../services/Auth';
 import './style.css';
-import Membros from '../../assets/images/Membro LUPP.png'; // Altere o caminho se necessário
+import Membros from '../../assets/images/Membro LUPP.png';
 
 export default function LoginPage() {
   const [form, setForm] = useState({ login: '', password: '' });
@@ -21,19 +21,19 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      // Realiza o login
-      const { token } = await login(form); // Apenas o token é retornado
-
-      // Salva o token no localStorage
+      const { token } = await login(form);
       localStorage.setItem('auth_token', token);
-
       showMessage('Login bem-sucedido!', 'success');
-      navigate('/home'); // Redireciona para a página home após o login
+      navigate('/home');
     } catch (error) {
       showMessage('Falha no login. Verifique suas credenciais.', 'error');
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleRegisterRedirect = () => {
+    navigate('/register'); // Redireciona para a página de cadastro
   };
 
   return (
@@ -74,6 +74,15 @@ export default function LoginPage() {
 
             <button type="submit" className="cadastro-button" disabled={loading}>
               {loading ? 'Entrando...' : 'Entrar'}
+            </button>
+
+            {/* Botão de redirecionamento para o cadastro */}
+            <button
+              type="button"
+              className="cadastro-button secondary"
+              onClick={handleRegisterRedirect}
+            >
+              Cadastrar-se
             </button>
           </form>
         </div>
