@@ -1,3 +1,4 @@
+//src/components/PostList/PostList.jsx
 import React, { useEffect, useState } from "react";
 import { getPosts } from "../../services/PostService";
 import {
@@ -12,7 +13,8 @@ import {
   DialogTitle,
   Button
 } from "@mui/material";
-import "./style.css";  // Para aplicar o estilo da mesma forma
+
+import './style.css'
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
@@ -75,9 +77,7 @@ const PostList = () => {
   return (
     <Box className="home-container">
       <Box className="home-content">
-        <Typography variant="h4" gutterBottom align="center">
-          Posts
-        </Typography>
+
 
         {loading ? (
           <Box className="loading-box">

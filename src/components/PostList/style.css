@@ -1,0 +1,77 @@
+/* Container principal da página */
+.home-container {
+  padding: 20px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* Carregamento centralizado */
+.loading-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+/* Grid responsiva dos cards */
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Estilo do card */
+.post-card {
+  cursor: pointer;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+  background-color: #fff;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Centralizar conteúdo */
+.post-card .MuiCardContent-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Estilo das mídias */
+.media-wrapper {
+  width: 100%;
+  max-height: 200px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.media-content {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Descrição estilizada */
+.description {
+  margin-top: 10px;
+  color: #555;
+}
+
+/* Estilo do diálogo */
+.dialog-media {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dialog-media .media-content {
+  max-height: 500px;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}

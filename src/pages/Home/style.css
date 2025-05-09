@@ -1,100 +1,80 @@
-/* Container principal */
 .home-container {
-  display: flex;
-  justify-content: center;
   padding: 2rem;
-  background-color: #f4f6f8;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Conteúdo principal */
-.home-content {
-  width: 60%;
-}
-@media (max-width: 780px) {
-  .home-content {
-    width: 100%;
-  }
+.home-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.5rem;
 }
 
-/* Loading */
-.loading-box {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
+.home-subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 2rem;
 }
 
-/* Grid de posts e tarefas */
-.posts-grid {
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+}
+
+.left-content {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #0288d1;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.main-image {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.right-content {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-/* Estilo do Card */
-.post-card {
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-.post-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
-}
-
-/* Título centralizado */
-.post-card .MuiTypography-h6 {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-/* Descrição */
-.description {
-  margin-top: 0.5rem;
-  font-style: italic;
-  color: #555;
-}
-
-/* Mídia */
-.media-wrapper {
-  margin: 1rem 0;
-  text-align: center;
-}
-
-.media-content {
-  width: 100%;
-  max-height: 500px;
-  object-fit: contain;
+.auth-warning {
+  padding: 1rem;
+  background-color: #ffebee;
+  color: #c62828;
   border-radius: 8px;
-}
-@media (max-width: 780px) {
-  .media-content {
-    max-height: 300px;
-  }
-}
-
-/* Botão "Realizar tarefa" */
-.MuiButton-containedPrimary {
-  background-color: #1976d2;
-  font-weight: bold;
-  border-radius: 20px;
-  padding: 6px 20px;
-  text-transform: none;
-}
-.MuiButton-containedPrimary:hover {
-  background-color: #115293;
-}
-
-/* Título das seções */
-.home-content > h4,
-.home-content > h5 {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  font-weight: 600;
-}
-
-/* Dialog */
-.dialog-media {
   text-align: center;
+  width: 100vh;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .home-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .main-image {
+    max-height: 200px;
+  }
 }
