@@ -1,35 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Search } from "lucide-react";
-import { searchMedia } from "../../services/Search"; // Importe a função de pesquisa
+import { searchMedia } from "../../services/Search";
 import "./style.css";
 import Logo from "../../assets/icons/logo.png";
 
 const NavigationBar = () => {
-  const [searchQuery, setSearchQuery] = useState("");  // Guarda o texto da pesquisa
-  const [results, setResults] = useState([]);  // Guarda os resultados da pesquisa
-  const [loading, setLoading] = useState(false);  // Estado para controle de carregamento
+  const [searchQuery, setSearchQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("auth_token");
+    setIsAuthenticated(!!token);
+  }, []);
 
   const handleSearchChange = async (e) => {
     const query = e.target.value;
     setSearchQuery(query);
 
-    // Se a pesquisa estiver vazia, limpe os resultados
     if (query.trim() === "") {
       setResults([]);
       return;
     }
 
     setLoading(true);
-
     try {
-      // Chama a API para buscar os dados
       const data = await searchMedia(query);
-      setResults(data); // Atualiza o estado com os resultados da pesquisa
-    } catch (error) {
-      setResults([]); // Limpa os resultados em caso de erro
+      setResults(data);
+    } catch {
+      setResults([]);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleAuthRedirect = () => {
+    navigate(isAuthenticated ? "/perfil" : "/login");
   };
 
   return (
@@ -38,7 +47,6 @@ const NavigationBar = () => {
         <img src={Logo} alt="Logo" />
       </div>
 
-      {/* Links */}
       <ul className="nav-links">
         <li>Manutenções Básicas</li>
         <li>Saúde e Bem Estar</li>
@@ -46,18 +54,16 @@ const NavigationBar = () => {
         <li>Área Membros</li>
       </ul>
 
-      {/* Barra de Pesquisa */}
       <div className="search-container">
         <input
           type="text"
           placeholder="Buscar..."
           className="search-input"
           value={searchQuery}
-          onChange={handleSearchChange} // Atualiza os resultados enquanto digita
+          onChange={handleSearchChange}
         />
         <Search className="search-icon" />
 
-        {/* Exibe resultados se houverem */}
         {searchQuery && (
           <div className="search-results">
             {loading ? (
@@ -66,7 +72,7 @@ const NavigationBar = () => {
               <ul>
                 {results.length > 0 ? (
                   results.map((item, index) => (
-                    <li key={index}>{item.title}</li> // Aqui você pode modificar o que exibir de acordo com a resposta da API
+                    <li key={index}>{item.title}</li>
                   ))
                 ) : (
                   <li>Nenhum resultado encontrado</li>
@@ -75,6 +81,11 @@ const NavigationBar = () => {
             )}
           </div>
         )}
+      </div>
+
+      {/* Botão de Perfil ou Login */}
+      <div className="auth-button" onClick={handleAuthRedirect}>
+        {isAuthenticated ? "Meu Perfil" : "Entrar / Cadastrar"}
       </div>
     </nav>
   );

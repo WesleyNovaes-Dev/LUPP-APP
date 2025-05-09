@@ -94,4 +94,22 @@
     width: 80px; /* Reduz o tamanho da logo */
     height: 80px;
   }
+  .membro-lupp-section {
+    display: none;}
+
+}
+
+.auth-button {
+  margin-left: 20px;
+  padding: 8px 16px;
+  background-color: #1976d2;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.auth-button:hover {
+  background-color: #115293;
 }
