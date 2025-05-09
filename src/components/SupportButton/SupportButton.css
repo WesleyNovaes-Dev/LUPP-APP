@@ -1,0 +1,117 @@
+/* SupportButton.css */
+.support-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ff3a3a;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(255, 58, 58, 0.3);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.support-button:hover {
+  background-color: #ff1a1a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 58, 58, 0.4);
+}
+
+.support-button:active {
+  transform: translateY(0);
+}
+
+.support-modal {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: min(90%, 350px);
+  background: white;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  padding: 24px;
+  z-index: 1000;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease-out;
+  transform-origin: bottom right;
+}
+
+.support-modal h3 {
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.25rem;
+}
+
+.support-modal p {
+  color: #666;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+.support-modal ul {
+  padding-left: 20px;
+  margin-bottom: 24px;
+}
+
+.support-modal li {
+  color: #444;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.close-support-button {
+  margin-top: 15px;
+  background-color: #f0f0f0;
+  color: #333;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.close-support-button:hover {
+  background-color: #e0e0e0;
+}
+
+
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Responsividade para mobile */
+@media (max-width: 480px) {
+  .support-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    bottom: 15px;
+    right: 15px;
+  }
+  
+  .support-modal {
+    bottom: 70px;
+    right: 15px;
+    width: calc(100% - 30px);
+    padding: 20px;
+  }
+}
