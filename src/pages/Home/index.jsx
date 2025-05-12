@@ -19,7 +19,7 @@ const HomePage = () => {
 
 
         <div className="right-content">
-          {isAdmin && <NewPostButton />}
+          <NewPostButton />
                     {isAuthenticated ? (
             <QuestionList />
           ) : (

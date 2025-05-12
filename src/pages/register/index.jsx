@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { register, login } from "../../services/Auth";
-import { saveToken } from "../../utils/auth";
+import { register } from "../../services/Auth";
+
 import "./style.css"; 
 import Membros from "../../assets/images/Membro LUPP.png";
 
 export default function RegisterPage() {
-  const [form, setForm] = useState({ login: "", password: "", confirmPassword: "" });
+  const [form, setForm] = useState({ name: "", login: "", password: "", confirmPassword: "" });
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function RegisterPage() {
     setLoading(true);
     try {
       // Cadastro
-      await register({ login: form.login, password: form.password, role: "USER" });
+      await register({ name: form.name, login: form.login, password: form.password, role: "ADMIN" });
       showMessage("Cadastro realizado com sucesso!", "success");
 
       // Redirecionar para login
@@ -52,6 +52,11 @@ export default function RegisterPage() {
         <div className="form-section">
           <form className="cadastro-form" onSubmit={handleSubmit}>
             {message && <div className={`alert ${message.type}`}>{message.text}</div>}
+
+            <div className="form-group">
+              <label htmlFor="name">Nome</label>
+              <input type="text" name="name" required placeholder="Nome" onChange={handleChange} />
+            </div>
 
             <div className="form-group">
               <label htmlFor="login">E-mail</label>

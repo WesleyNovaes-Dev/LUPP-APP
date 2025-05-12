@@ -18,6 +18,9 @@ export const login = async (loginData) => {
   }
 };
 
+
+
+
 // Registro do usuário
 export const register = async (registerData) => {
   try {
@@ -30,5 +33,29 @@ export const register = async (registerData) => {
   } catch (error) {
     console.error("Erro ao registrar usuário:", error);
     throw new Error("Falha ao registrar o usuário");
+  }
+};
+
+
+export const getUserProfile = async (token) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/my-profile`, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao recuperar o perfil");
+    }
+
+    const data = await response.json();
+    console.log("Perfil:", data);  // <-- Aqui deve aparecer a role
+    return data;
+  } catch (error) {
+    console.error("Erro ao buscar perfil:", error);
+    return null;
   }
 };
