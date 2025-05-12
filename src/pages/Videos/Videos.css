@@ -1,0 +1,74 @@
+.videos-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.videos-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.categories-nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.categories-nav button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.categories-nav button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.categories-nav button:hover {
+  background-color: #ddd;
+}
+
+.submit-video-section {
+  margin-top: 50px;
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.submit-video-section h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.submit-video-section p {
+  color: #666;
+  margin-bottom: 20px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.submit-video-button {
+  padding: 12px 24px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-video-button:hover {
+  background-color: #218838;
+}
